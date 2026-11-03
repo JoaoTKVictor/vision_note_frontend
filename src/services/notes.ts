@@ -15,11 +15,11 @@ class NotesService {
         return data;
     }
     async update(id: string, note: NoteUpdateDTO) {
-        const { data } = await api.patch(`/notes/${id}`, note);
+        const { data } = await api.patch(`/notes/${id}/`, note);
         return data;
     }
     async delete(id: string) {
-        await api.delete(`/notes/${id}`);
+        await api.delete(`/notes/${id}/`);
         return true;
     }
 }
