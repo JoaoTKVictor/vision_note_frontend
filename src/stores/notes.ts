@@ -28,7 +28,7 @@ export const useNotesStore = defineStore('notes', () => {
     async function findAllNotes() {
         try {
             const data = await NotesService.findAll();
-            notes.value = data.data;
+            notes.value = data;
         }
         catch(e) {
             console.error(`Error in GET notes: ${e}`);
@@ -36,7 +36,7 @@ export const useNotesStore = defineStore('notes', () => {
     }
     async function findNoteById(id: string) {
         try {
-            const { data } = await NotesService.findById(id);
+            const data = await NotesService.findById(id);
             note.value = data;
             state.note_selected = note.value?.id ? note.value.id : null;
         } catch(e) {
@@ -45,7 +45,7 @@ export const useNotesStore = defineStore('notes', () => {
     }
     async function createNote(newNote: NoteCreateDTO) {
         try {
-            const { data } = await NotesService.create(newNote);
+            const data = await NotesService.create(newNote);
             notes.value?.push(data);
             selectNote(data);
         } catch(e) {
@@ -61,8 +61,8 @@ export const useNotesStore = defineStore('notes', () => {
             const index = notes.value.findIndex(n => n.id == id);
 
             if (index != -1) {
-                console.log(updateNote.data);
-                notes.value[index] = updateNote.data;
+                console.log(updateNote);
+                notes.value[index] = updateNote;
             }
         } catch(e) {
             console.error(`Error in PATCH note: ${e}`);
